@@ -6,7 +6,7 @@
   'use strict';
 
   // ====== CONFIG ======
-  const WHATSAPP_NUMBER = '212600000000'; // ← غيّر إلى رقمك الحقيقي
+  const WHATSAPP_NUMBER = '212691805347'; // رقم واتساب HARRASSE.SHOP
   const CURRENCY = 'د.م';
   const STORAGE_KEY = 'harrasse_cart_v1';
 
