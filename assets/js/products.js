@@ -338,6 +338,7 @@ const PRODUCTS = [
     price: 1500, oldPrice: 1799,
     icon: 'fa-box',
     color: '#1a6b4e',
+    image: 'assets/images/c9.webp',
     rating: 5, badge: 'best',
   },
   {

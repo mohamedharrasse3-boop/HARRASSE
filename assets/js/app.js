@@ -99,11 +99,17 @@
 
   function productCard(p) {
     const bg = `linear-gradient(135deg, ${p.color || '#1a6b4e'} 0%, rgba(0,0,0,.35) 100%)`;
+    const imageContent = p.image
+      ? `<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" /><div class="product__img-fallback" style="display:none; background: ${bg};"><i class="fas ${p.icon}"></i></div>`
+      : `<i class="fas ${p.icon}"></i>`;
+    const imgStyle = p.image
+      ? 'background: #ffffff;'
+      : `background: ${bg};`;
     return `
       <article class="product" data-cat="${p.cat}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
         ${p.badge ? getBadge(p.badge) : getDiscount(p)}
-        <div class="product__img" style="background: ${bg};">
-          <i class="fas ${p.icon}"></i>
+        <div class="product__img" style="${imgStyle}">
+          ${imageContent}
         </div>
         <div class="product__body">
           <div class="product__cat">${p.catName}</div>
