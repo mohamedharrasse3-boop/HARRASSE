@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="goldHmini" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fbe89a"/>
@@ -12,14 +12,10 @@
     </linearGradient>
   </defs>
 
-  <!-- Black rounded background -->
   <rect width="200" height="200" rx="36" fill="#0a0a0a"/>
-
-  <!-- Gold ring border -->
   <rect x="6" y="6" width="188" height="188" rx="32" fill="none" stroke="url(#goldHmini)" stroke-width="1.5" opacity="0.3"/>
 
   <g transform="translate(100, 100)">
-    <!-- Globe (background, faded) -->
     <g transform="translate(-38, -10)" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.65">
       <circle cx="0" cy="0" r="22"/>
       <ellipse cx="0" cy="0" rx="22" ry="8"/>
@@ -27,27 +23,22 @@
       <line x1="-22" y1="0" x2="22" y2="0"/>
     </g>
 
-    <!-- Big H -->
     <g fill="url(#goldHmini)">
       <path d="M -22 -50 L -8 -50 L -8 50 L -22 50 Z"/>
       <path d="M 8 -50 L 22 -50 L 22 50 L 8 50 Z"/>
       <path d="M -22 -8 L 22 -8 L 22 8 L -22 8 Z"/>
-      <!-- Serifs -->
       <path d="M -27 -50 L -3 -50 L -3 -45 L -27 -45 Z"/>
       <path d="M 3 -50 L 27 -50 L 27 -45 L 3 -45 Z"/>
       <path d="M -27 45 L -3 45 L -3 50 L -27 50 Z"/>
       <path d="M 3 45 L 27 45 L 27 50 L 3 50 Z"/>
-      <!-- Curved tail -->
       <path d="M -35 38 Q -10 60, 25 50 Q 38 45, 42 38 L 44 45 Q 35 55, 25 58 Q -10 65, -38 45 Z"/>
     </g>
 
-    <!-- Small bag (top right) -->
     <g transform="translate(38, -30)" fill="#ffffff" stroke="#ffffff" stroke-width="1.2">
       <path d="M -8 -2 L -10 12 L 10 12 L 8 -2 Z" stroke-linejoin="round"/>
       <path d="M -5 -2 Q -5 -9, 0 -9 Q 5 -9, 5 -2" fill="none" stroke-linecap="round"/>
     </g>
 
-    <!-- Mini cart (bottom right) -->
     <g transform="translate(40, 28)" stroke="url(#goldCartMini)" stroke-width="1.5" fill="url(#goldCartMini)" stroke-linejoin="round">
       <path d="M -10 -3 L 12 -3 L 9 8 L -7 8 Z" fill="none"/>
       <path d="M -12 -6 L -16 -6" fill="none" stroke-linecap="round"/>
