@@ -1,0 +1,22 @@
+{
+  "name": "HARRASSE.SHOP - منتجات فوريفر الأصلية",
+  "short_name": "HARRASSE",
+  "description": "وكيل معتمد لمنتجات فوريفر ليفينج. منتجات أصلية 100% بأفضل الأسعار.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b3d2e",
+  "theme_color": "#0b3d2e",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["shopping", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/images/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

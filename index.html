@@ -38,9 +38,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <link rel="stylesheet" href="assets/css/style.css?v=11" />
 
   <link rel="icon" type="image/svg+xml" href="assets/images/logo-icon.svg?v=2" />
+
+  <!-- PWA Manifest (allows users to install site as an app) -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="HARRASSE" />
+  <link rel="apple-touch-icon" href="assets/images/logo-icon.svg" />
 
   <!-- Structured data for SEO -->
   <script type="application/ld+json">
@@ -255,6 +262,21 @@
             <option value="price-desc">السعر: من الأعلى للأقل</option>
             <option value="name">حسب الاسم</option>
           </select>
+        </div>
+
+        <div class="quick-filters" id="quickFilters">
+          <button class="quick-filter active" data-filter="all">
+            <i class="fas fa-th"></i> الكل
+          </button>
+          <button class="quick-filter" data-filter="best">
+            <i class="fas fa-fire"></i> الأكثر مبيعاً
+          </button>
+          <button class="quick-filter" data-filter="new">
+            <i class="fas fa-bolt"></i> جديد
+          </button>
+          <button class="quick-filter" data-filter="discount">
+            <i class="fas fa-tag"></i> في تخفيض
+          </button>
         </div>
       </div>
 
@@ -524,8 +546,34 @@
   <!-- ============ TOAST ============ -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox__overlay" data-close></div>
+    <div class="lightbox__content">
+      <button class="lightbox__close" data-close aria-label="إغلاق">
+        <i class="fas fa-xmark"></i>
+      </button>
+      <div class="lightbox__image-wrap">
+        <img id="lightboxImg" src="" alt="" />
+      </div>
+      <div class="lightbox__info">
+        <h3 class="lightbox__name" id="lightboxName"></h3>
+        <p class="lightbox__desc" id="lightboxDesc"></p>
+        <div class="lightbox__price" id="lightboxPrice"></div>
+        <div class="lightbox__actions">
+          <button class="btn btn-primary" id="lightboxAdd" data-id="">
+            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+          </button>
+          <button class="btn btn-ghost" id="lightboxShare">
+            <i class="fab fa-whatsapp"></i> مشاركة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="assets/js/products.js?v=9"></script>
-  <script src="assets/js/app.js?v=9"></script>
+  <script src="assets/js/products.js?v=11"></script>
+  <script src="assets/js/app.js?v=11"></script>
 </body>
 </html>

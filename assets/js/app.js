@@ -21,6 +21,7 @@
   let activeCat = 'all';
   let searchTerm = '';
   let sortBy = 'default';
+  let activeQuickFilter = 'all';
 
   function loadCart() {
     try {
@@ -114,7 +115,10 @@
     return `
       <article class="product" data-cat="${p.cat}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
         ${p.badge ? getBadge(p.badge) : getDiscount(p)}
-        <div class="product__img ${p.image ? 'product__img--has-photo' : ''}" style="${imgStyle}">
+        <button class="product__share" data-id="${p.id}" aria-label="مشاركة عبر واتساب" title="مشاركة عبر واتساب">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <div class="product__img ${p.image ? 'product__img--has-photo' : ''}" style="${imgStyle}" data-zoom-id="${p.id}">
           ${imageContent}
         </div>
         <div class="product__body">
@@ -139,6 +143,16 @@
     let list = [...window.PRODUCTS];
 
     if (activeCat !== 'all') list = list.filter((p) => p.cat === activeCat);
+
+    // Apply quick filter
+    if (activeQuickFilter === 'best') {
+      list = list.filter((p) => p.badge === 'best');
+    } else if (activeQuickFilter === 'new') {
+      list = list.filter((p) => p.badge === 'new');
+    } else if (activeQuickFilter === 'discount') {
+      list = list.filter((p) => p.oldPrice && p.oldPrice > p.price);
+    }
+
     if (searchTerm) {
       const q = searchTerm.trim().toLowerCase();
       list = list.filter((p) =>
@@ -171,9 +185,120 @@
         addToCart(id);
       });
     });
+    // Share buttons
+    $$('.product__share', grid).forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        shareProduct(id);
+      });
+    });
+    // Click image to enlarge
+    $$('.product__img', grid).forEach((imgWrap) => {
+      imgWrap.addEventListener('click', () => {
+        const id = imgWrap.dataset.zoomId;
+        if (id) openLightbox(id);
+      });
+    });
+  }
+
+  // ====== SHARE PRODUCT VIA WHATSAPP ======
+  function shareProduct(id) {
+    const p = findProduct(id);
+    if (!p) return;
+    const url = window.location.origin + window.location.pathname;
+    const msg =
+      `🛍️ *${p.name}*\n\n` +
+      `${p.desc}\n\n` +
+      `💰 السعر: *${formatPrice(p.price)}*` +
+      (p.oldPrice ? ` (بدلاً من ${formatPrice(p.oldPrice)})` : '') +
+      `\n\n🌐 شاهد المزيد: ${url}\n` +
+      `📞 للطلب: HARRASSE.SHOP`;
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
+    toast('فتح واتساب لمشاركة المنتج', 'fa-share-nodes');
+  }
+
+  // ====== LIGHTBOX (Image Zoom) ======
+  function openLightbox(id) {
+    const p = findProduct(id);
+    if (!p) return;
+    const lightbox = $('#lightbox');
+    if (!lightbox) return;
+    const lbImg = $('#lightboxImg');
+    const lbName = $('#lightboxName');
+    const lbDesc = $('#lightboxDesc');
+    const lbPrice = $('#lightboxPrice');
+    const lbAdd = $('#lightboxAdd');
+    if (lbImg && p.image) {
+      lbImg.src = p.image;
+      lbImg.alt = p.name;
+      lbImg.style.display = 'block';
+    } else if (lbImg) {
+      lbImg.style.display = 'none';
+    }
+    if (lbName) lbName.textContent = p.name;
+    if (lbDesc) lbDesc.textContent = p.desc;
+    if (lbPrice) {
+      lbPrice.innerHTML = `<span class="lightbox__price-new">${formatPrice(p.price)}</span>` +
+        (p.oldPrice ? ` <span class="lightbox__price-old">${formatPrice(p.oldPrice)}</span>` : '');
+    }
+    if (lbAdd) lbAdd.dataset.id = p.id;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    const lightbox = $('#lightbox');
+    if (!lightbox) return;
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  const lightboxEl = $('#lightbox');
+  if (lightboxEl) {
+    lightboxEl.addEventListener('click', (e) => {
+      if (e.target.matches('[data-close]') || e.target.closest('[data-close]')) closeLightbox();
+    });
+    const lbAdd = $('#lightboxAdd');
+    if (lbAdd) {
+      lbAdd.addEventListener('click', () => {
+        const id = lbAdd.dataset.id;
+        if (id) {
+          addToCart(id);
+          closeLightbox();
+        }
+      });
+    }
+    const lbShare = $('#lightboxShare');
+    if (lbShare) {
+      lbShare.addEventListener('click', () => {
+        const id = $('#lightboxAdd')?.dataset.id;
+        if (id) shareProduct(id);
+      });
+    }
   }
 
   // ====== CATEGORIES ======
+  // Update category counts
+  function updateCategoryCounts() {
+    if (!window.PRODUCTS) return;
+    const counts = { all: window.PRODUCTS.length };
+    window.PRODUCTS.forEach(p => {
+      counts[p.cat] = (counts[p.cat] || 0) + 1;
+    });
+    $$('.cat').forEach((btn) => {
+      const cat = btn.dataset.cat;
+      const count = counts[cat] || 0;
+      let countEl = btn.querySelector('.cat__count');
+      if (!countEl) {
+        countEl = document.createElement('span');
+        countEl.className = 'cat__count';
+        btn.appendChild(countEl);
+      }
+      countEl.textContent = count;
+    });
+  }
+  updateCategoryCounts();
+
   $$('.cat').forEach((btn) => {
     btn.addEventListener('click', () => {
       $$('.cat').forEach((b) => b.classList.remove('active'));
@@ -204,6 +329,57 @@
       renderProducts();
     });
   }
+
+  // ====== QUICK FILTERS ======
+  $$('.quick-filter').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      $$('.quick-filter').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeQuickFilter = btn.dataset.filter;
+      renderProducts();
+    });
+  });
+
+  // ====== ANIMATED COUNTERS ======
+  function animateCounter(el, target) {
+    const duration = 1500;
+    const start = performance.now();
+    const startVal = 0;
+    const isFloat = String(target).includes('.');
+    const isPlus = String(target).startsWith('+');
+    const cleanTarget = parseFloat(String(target).replace(/[^\d.]/g, ''));
+
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = startVal + (cleanTarget - startVal) * eased;
+      el.textContent = (isPlus ? '+' : '') +
+        (isFloat ? value.toFixed(1) : Math.floor(value).toLocaleString('ar-MA'));
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = String(target);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function setupCounters() {
+    if (!('IntersectionObserver' in window)) return;
+    const counters = $$('.hero__stats strong');
+    if (!counters.length) return;
+
+    const targets = counters.map((el) => el.textContent.trim());
+    counters.forEach((el) => { el.dataset.target = el.textContent.trim(); el.textContent = '0'; });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, entry.target.dataset.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((el) => io.observe(el));
+  }
+  setupCounters();
 
   // ====== CART ======
   const cartBtn = $('#cartBtn');
