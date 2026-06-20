@@ -396,7 +396,7 @@ const PRODUCTS = [
   },
   {
     id: 'c9-program',
-    name: 'برنامج Clean 9 (C9) — شوكولاتة',
+    name: 'Programme C9™ Chocolat',
     cat: 'weight',
     catName: 'التخسيس والريجيم',
     desc: 'برنامج 9 أيام لإعادة ضبط الجسم بنكهة الشوكولاتة اللذيذة — نتائج ملحوظة وانطلاقة جديدة.',
@@ -408,7 +408,7 @@ const PRODUCTS = [
   },
   {
     id: 'c9-vanilla',
-    name: 'برنامج Clean 9 (C9) — فانيليا',
+    name: 'Programme C9™ Vanille',
     cat: 'weight',
     catName: 'التخسيس والريجيم',
     desc: 'برنامج 9 أيام لإعادة ضبط الجسم بنكهة الفانيليا الناعمة — نتائج ملحوظة وانطلاقة جديدة.',
