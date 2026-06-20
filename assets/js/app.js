@@ -105,7 +105,6 @@
       ? `<img src="${p.image}" alt="${p.name}" 
            ${isPriority ? 'fetchpriority="high"' : 'loading="lazy" decoding="async" fetchpriority="low"'}
            width="280" height="220"
-           onload="this.classList.add('loaded');"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
          <div class="product__img-fallback" style="display:none; background: ${bg};"><i class="fas ${p.icon}"></i></div>`
       : `<i class="fas ${p.icon}"></i>`;
