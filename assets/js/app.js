@@ -600,16 +600,6 @@
     });
   }
 
-  // ====== PAGE LOADER ======
-  // Hide loader once everything is ready
-  window.addEventListener('load', () => {
-    const loader = $('#pageLoader');
-    if (loader) {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 500);
-    }
-  });
-
   // ====== INIT ======
   renderProducts();
   updateCartUI();
