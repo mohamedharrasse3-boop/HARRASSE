@@ -190,18 +190,6 @@ const PRODUCTS = [
     color: '#a8d5ba',
     rating: 5, badge: 'new',
   },
-  {
-    id: 'serum-hydratant',
-    image: 'assets/images/serum-hydratant.webp',
-    name: "Sérum Hydratant",
-    cat: 'skincare',
-    catName: "العناية بالبشرة",
-    desc: "سيروم مرطب فاخر — ترطيب عميق ومتقدم للبشرة، يمنحها نضارة ومرونة طبيعية.",
-    price: 399, oldPrice: 449,
-    icon: 'fa-droplet',
-    color: '#5d8aa8',
-    rating: 5, badge: 'new',
-  },
 
   /* ============== التخسيس والريجيم (WEIGHT) ============== */
   {
