@@ -474,6 +474,8 @@
 
   function updateCartUI() {
     if (cartBadge) cartBadge.textContent = cartCount();
+    const mobileBadge = $('#mobileCartBadge');
+    if (mobileBadge) mobileBadge.textContent = cartCount();
     if (cartTotalEl) cartTotalEl.textContent = formatPrice(cartTotal());
     renderCart();
   }
@@ -492,6 +494,8 @@
   }
 
   if (cartBtn) cartBtn.addEventListener('click', openCart);
+  const mobileCartBtn = $('#mobileCartBtn');
+  if (mobileCartBtn) mobileCartBtn.addEventListener('click', openCart);
   if (cartDrawer) {
     cartDrawer.addEventListener('click', (e) => {
       if (e.target.matches('[data-close]') || e.target.closest('[data-close]')) closeCart();

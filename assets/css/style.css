@@ -1597,3 +1597,81 @@ h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.25; }
 .hero__stats strong {
   font-variant-numeric: tabular-nums;
 }
+
+
+
+/* ============ MOBILE STICKY ACTION BAR ============ */
+.mobile-action-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid var(--ink-100);
+  box-shadow: 0 -4px 20px rgba(11,61,46,0.08);
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0));
+  z-index: 60;
+}
+.mobile-action-bar__btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-700);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition);
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+.mobile-action-bar__btn i {
+  font-size: 20px;
+  color: var(--green-700);
+}
+.mobile-action-bar__btn:active {
+  background: var(--green-50);
+  transform: scale(0.95);
+}
+.mobile-action-bar__btn--primary {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  margin: 0 4px;
+  box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+}
+.mobile-action-bar__btn--primary i {
+  color: #fff;
+  font-size: 22px;
+}
+.mobile-cart-badge {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: var(--gold-500);
+  color: var(--green-900);
+  font-size: 10px;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+@media (max-width: 768px) {
+  .mobile-action-bar { display: flex; gap: 4px; }
+  .fab-whatsapp { bottom: 78px; }
+  .scroll-top { bottom: 134px; }
+  body { padding-bottom: 70px; }
+}
+.product__img img {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
+}

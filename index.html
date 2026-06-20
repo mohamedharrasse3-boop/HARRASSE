@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/style.css?v=14" />
+  <link rel="stylesheet" href="assets/css/style.css?v=15" />
 
   <link rel="icon" type="image/svg+xml" href="assets/images/logo-icon.svg?v=2" />
 
@@ -516,6 +516,23 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
+  <!-- ============ MOBILE STICKY ACTION BAR ============ -->
+  <div class="mobile-action-bar">
+    <a href="#products" class="mobile-action-bar__btn">
+      <i class="fas fa-bag-shopping"></i>
+      <span>المنتجات</span>
+    </a>
+    <button class="mobile-action-bar__btn" id="mobileCartBtn" aria-label="سلة التسوق">
+      <i class="fas fa-cart-shopping"></i>
+      <span>السلة</span>
+      <span class="mobile-cart-badge" id="mobileCartBadge">0</span>
+    </button>
+    <a href="https://wa.me/212691805347?text=مرحباً، أريد الاستفسار عن منتج من HARRASSE.SHOP" target="_blank" rel="noopener" class="mobile-action-bar__btn mobile-action-bar__btn--primary">
+      <i class="fab fa-whatsapp"></i>
+      <span>تواصل</span>
+    </a>
+  </div>
+
   <!-- ============ CART DRAWER ============ -->
   <div class="drawer" id="cartDrawer" aria-hidden="true">
     <div class="drawer__overlay" data-close></div>
@@ -569,7 +586,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/products.js?v=14"></script>
-  <script src="assets/js/app.js?v=14"></script>
+  <script src="assets/js/products.js?v=15"></script>
+  <script src="assets/js/app.js?v=15"></script>
 </body>
 </html>
