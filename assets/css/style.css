@@ -545,19 +545,37 @@ h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.25; }
   display: flex; align-items: center; justify-content: center;
   position: relative;
   overflow: hidden;
+  background: #f7faf8;
 }
 .product__img--has-photo {
   background: #f7faf8;
 }
+/* Icon background that ALWAYS shows (image overlays it when loaded) */
+.product__icon-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+.product__icon-bg i {
+  font-size: 80px;
+  color: var(--gold-400);
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.2));
+  opacity: 0.85;
+}
 .product__img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 32px 14px 14px 14px;
-  z-index: 1;
-  position: relative;
+  padding: 28px 12px 12px 12px;
+  z-index: 2;
   transition: transform var(--transition);
   animation: fadeInImage 0.5s ease;
+  background: #f7faf8;
 }
 @keyframes fadeInImage {
   from { opacity: 0; }
@@ -1231,9 +1249,10 @@ h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.25; }
 
 @media (max-width: 480px) {
   .products { grid-template-columns: 1fr 1fr; gap: 14px; }
-  .product__img { height: 140px; }
+  .product__img { height: 160px; }
   .product__img i { font-size: 56px; }
-  .product__img img { padding: 26px 8px 8px 8px; }
+  .product__icon-bg i { font-size: 48px; }
+  .product__img img { padding: 22px 8px 8px 8px; }
   .product__badge { 
     font-size: 9px; 
     padding: 3px 8px; 
