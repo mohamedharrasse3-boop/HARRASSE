@@ -67,19 +67,6 @@
 </head>
 <body>
 
-  <!-- ============ PWA INSTALL TOP BANNER ============ -->
-  <div class="pwa-top-banner" id="pwaBanner" hidden>
-    <div class="pwa-top-banner__inner">
-      <img src="assets/images/icon-192.png" alt="HARRASSE" class="pwa-top-banner__icon" />
-      <div class="pwa-top-banner__text">
-        <strong>إضافة HARRASSE.SHOP إلى الشاشة الرئيسية</strong>
-        <span>وصول سريع كتطبيق</span>
-      </div>
-      <button class="pwa-top-banner__btn" id="pwaInstallBtn">إضافة</button>
-      <button class="pwa-top-banner__close" id="pwaCloseBtn" aria-label="إغلاق">✕</button>
-    </div>
-  </div>
-
   <!-- ============ TOP BAR ============ -->
   <div class="topbar">
     <div class="container topbar__inner">
@@ -574,57 +561,10 @@
   <script src="assets/js/products.js?v=20"></script>
   <script src="assets/js/app.js?v=20"></script>
   <script>
-    // Register Service Worker for PWA
+    // Register Service Worker for PWA (enables Chrome's native install prompt)
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
-
-    // PWA Install Top Banner
-    (function() {
-      let deferredPrompt = null;
-      const banner = document.getElementById('pwaBanner');
-      const installBtn = document.getElementById('pwaInstallBtn');
-      const closeBtn = document.getElementById('pwaCloseBtn');
-
-      // Already installed?
-      const isInstalled = window.matchMedia('(display-mode: standalone)').matches
-                       || window.navigator.standalone;
-      if (isInstalled) return;
-
-      // Show banner immediately on page load
-      banner.hidden = false;
-
-      // Capture Chrome's native install prompt
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-      });
-
-      // Install button
-      installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const result = await deferredPrompt.userChoice;
-          if (result.outcome === 'accepted') {
-            banner.hidden = true;
-          }
-          deferredPrompt = null;
-        } else {
-          // iOS or no prompt available
-          alert('📱 لإضافة الموقع للشاشة الرئيسية:\n\n• Chrome (Android): اضغط على ⋮ ثم "إضافة إلى الشاشة الرئيسية"\n\n• Safari (iPhone): اضغط على زر المشاركة ↑ ثم "إضافة إلى الشاشة الرئيسية"');
-        }
-      });
-
-      // Close button - hide for this session only (not permanent)
-      closeBtn.addEventListener('click', () => {
-        banner.hidden = true;
-      });
-
-      // Hide if installed during session
-      window.addEventListener('appinstalled', () => {
-        banner.hidden = true;
-      });
-    })();
   </script>
 </body>
 </html>
