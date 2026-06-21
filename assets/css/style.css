@@ -1653,7 +1653,5 @@ h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.25; }
 .btn-install:active { transform: scale(0.96); }
 
 @media (max-width: 480px) {
-  .btn-install { padding: 7px 10px; font-size: 12px; }
-  .btn-install span { display: none; }
-  .btn-install i { font-size: 14px; }
+  .btn-install { display: none; }
 }
